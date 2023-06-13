@@ -1,0 +1,8 @@
+<!-- Copyright (C) 2023 Matt Coughlin - All Rights Reserved -->
+
+<resources>
+    <string name="app_name">Data Sync</string>
+    <string name="save">Save</string>
+    <string name="get">Get</string>
+    <string name="enter_value">Enter Value</string>
+</resources>
