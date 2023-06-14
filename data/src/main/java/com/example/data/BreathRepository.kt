@@ -4,13 +4,6 @@ package com.example.data
 
 import com.example.model.BreathCheck
 import com.example.network.BreathApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class BreathRepository @Inject constructor(
@@ -18,23 +11,28 @@ class BreathRepository @Inject constructor(
     private val api: BreathApi
 ) {
     fun getBreathChecks(): List<BreathCheck> {
-        return runBlocking {
-            breathDao.insertAll(*api.getRemoteBreathChecks().toTypedArray())
-            breathDao.getAll()
-        }
+        // TODO: Implement a real SyncAdapter.
+        // Ideally the sync adapter would get all the remote breath checks and sync them
+        // before anything attempts to get the data for the UI.
+        breathDao.insertAll(*api.getRemoteBreathChecks().toTypedArray())
+        return breathDao.getAll()
     }
 
     fun getBreathCheckById(id: Int): BreathCheck {
-        return runBlocking {
-            breathDao.insertAll(*api.getRemoteBreathChecks().toTypedArray())
-            breathDao.getById(id)
-        }
+        // This should also use a sync adapter instead.
+        breathDao.insertAll(*api.getRemoteBreathChecks().toTypedArray())
+        return breathDao.getById(id)
     }
 
     fun saveBreathCheck(check: BreathCheck) {
-        CoroutineScope(Dispatchers.IO).launch {
-            breathDao.insert(check)
-            api.addBreathCheck(check)
+        val rowId = breathDao.insert(check)
+        api.addBreathCheck(breathDao.getByRowId(rowId))
+    }
+
+    fun deleteBreathChecks() {
+        for (check in breathDao.getAll()) {
+            breathDao.delete(check)
+            api.deleteBreathCheck(check)
         }
     }
 }

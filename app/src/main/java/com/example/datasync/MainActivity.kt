@@ -67,6 +67,11 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(8.dp))
                         SaveButton { viewModel.saveBreathCheck(enteredValue.toDouble()) }
                         Spacer(modifier = Modifier.height(8.dp))
+                        DeleteButton {
+                            viewModel.deleteBreathChecks()
+                            viewModel.getBreathChecks()
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
                         GetButton { viewModel.getBreathChecks() }
                         Spacer(modifier = Modifier.height(8.dp))
                         BreathCheckList(checks = breathChecks)
@@ -109,6 +114,13 @@ fun SaveButton(onClick: () -> Unit) {
 fun GetButton(onClick: () -> Unit) {
     Button(modifier = Modifier.fillMaxWidth(), onClick = onClick) {
         Text(text = stringResource(id = R.string.get))
+    }
+}
+
+@Composable
+fun DeleteButton(onClick: () -> Unit) {
+    Button(modifier = Modifier.fillMaxWidth(), onClick = onClick) {
+        Text(text = "Delete All")
     }
 }
 

@@ -7,25 +7,32 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.model.BreathCheck
 
 @Dao
 interface BreathDao {
     @Query("SELECT * FROM breath_checks")
-    suspend fun getAll(): List<BreathCheck>
+    fun getAll(): List<BreathCheck>
 
     @Query("SELECT * FROM breath_checks WHERE id IN (:ids)")
-    suspend fun loadAllByIds(ids: IntArray): List<BreathCheck>
+    fun loadAllByIds(ids: IntArray): List<BreathCheck>
 
     @Query("SELECT * FROM breath_checks WHERE id IS :id")
-    suspend fun getById(id: Int): BreathCheck
+    fun getById(id: Int): BreathCheck
+
+    @Query("SELECT * FROM breath_checks WHERE rowid IS :rowId")
+    fun getByRowId(rowId: Long): BreathCheck
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(check: BreathCheck)
+    fun insert(check: BreathCheck): Long
+
+    @Update
+    fun update(check: BreathCheck)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg checks: BreathCheck)
+    fun insertAll(vararg checks: BreathCheck): List<Long>
 
     @Delete
-    suspend fun delete(check: BreathCheck)
+    fun delete(check: BreathCheck)
 }

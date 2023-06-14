@@ -21,4 +21,8 @@ class BreathApi {
             breathChecks.add(check)
         }
     }
+
+    fun deleteBreathCheck(check: BreathCheck) {
+        breathChecks.removeAll { it.id == check.id }
+    }
 }

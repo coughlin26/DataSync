@@ -32,3 +32,17 @@ material found on our website.
 2. Yes, editing is allowed.
 3. Unclear, more research and testing is required.
 
+## CURRENT ISSUES
+
+1. The remote API does not use or consider accounts. Currently that means this only works for 1
+   user.
+2. There is no way to add remote breath checks to test the API sync.
+
+## FUTURE WORK
+
+1. Define more interfaces in the libraries and allow consumers to create their own implementation.
+2. Build out an account based sync system.
+3. Implement a real `SyncAdapter` to handle the API
+   sync. https://developer.android.com/training/sync-adapters/creating-sync-adapter#CreateSyncAdapter
+4. Limit API and database calls by timestamp where appropriate to reduce the number of transactions,
+   data transferred, and time to execute.

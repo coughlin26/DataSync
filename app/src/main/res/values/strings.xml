@@ -3,6 +3,7 @@
 <resources>
     <string name="app_name">Data Sync</string>
     <string name="save">Save</string>
-    <string name="get">Get</string>
+    <string name="delete">Delete</string>
+    <string name="get">Get All</string>
     <string name="enter_value">Enter Value</string>
 </resources>
