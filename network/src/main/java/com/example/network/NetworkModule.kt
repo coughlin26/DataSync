@@ -1,3 +1,5 @@
+/* Copyright (C) 2023 Matt Coughlin - All Rights Reserved */
+
 package com.example.network
 
 import dagger.Module
