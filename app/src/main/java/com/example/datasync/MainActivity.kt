@@ -3,6 +3,7 @@
 package com.example.datasync
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -115,14 +116,21 @@ fun GetButton(onClick: () -> Unit) {
 fun BreathCheckList(checks: List<BreathCheck>) {
     LazyColumn(
         modifier = Modifier
-            .heightIn(0.dp, 200.dp)
+            .heightIn(0.dp, 250.dp)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         contentPadding = PaddingValues(4.dp)
     ) {
         items(checks) { check ->
-            Text(text = "Breath Check: ${check.value} ${check.timestamp}")
+            Text(
+                text = "Breath Check: ${check.value} ${
+                    DateFormat.format(
+                        "MMM dd yy hh:mm",
+                        check.timestamp
+                    )
+                }"
+            )
         }
     }
 }
@@ -140,7 +148,7 @@ fun ScreenPreview() {
             ValueEnterBox("") {}
             SaveButton {}
             GetButton {}
-            BreathCheckList(checks = listOf(BreathCheck(1, 3.5, Date())))
+            BreathCheckList(checks = listOf(BreathCheck(3.5, Date())))
         }
     }
 }

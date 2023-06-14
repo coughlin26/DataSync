@@ -10,9 +10,9 @@ import java.util.Date
 
 @Entity(tableName = "breath_checks")
 data class BreathCheck(
-    @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo val value: Double,
-    @ColumnInfo val timestamp: Date
+    @ColumnInfo val timestamp: Date,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
 )
 
 class DateConverters {
