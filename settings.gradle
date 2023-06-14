@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "Data Sync"
 include ':app'
 include ':data'
+include ':network'
+include ':model'
